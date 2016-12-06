@@ -7,29 +7,34 @@ public class PlayerMove : MonoBehaviour {
     public float maxHorVel;
     public bool CanJump;
     public Vector3 StartP;
+    public bool Editing;
 	// Use this for initialization
 	void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         CanJump = false;
+        Editing = false;
         StartP = this.transform.position;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        horV = rb2d.velocity.x;
+        if (!Editing)
+        {
+            horV = rb2d.velocity.x;
 
-        if (Input.GetKey("left") && rb2d.velocity.x > -maxHorVel)
-        {
-            rb2d.AddForce(new Vector3(-10, 0, 0));
-        }
-        if (Input.GetKey("right") && rb2d.velocity.x < maxHorVel)
-        {
-            rb2d.AddForce(new Vector3(10, 0, 0));
-        }
-        if (Input.GetKey("up") && CanJump)
-        {
-            rb2d.AddForce(new Vector3(0, 300, 0));
-            CanJump = false;
+            if (Input.GetKey("left") && rb2d.velocity.x > -maxHorVel)
+            {
+                rb2d.AddForce(new Vector3(-10, 0, 0));
+            }
+            if (Input.GetKey("right") && rb2d.velocity.x < maxHorVel)
+            {
+                rb2d.AddForce(new Vector3(10, 0, 0));
+            }
+            if (Input.GetKey("up") && CanJump)
+            {
+                rb2d.AddForce(new Vector3(0, 350, 0));
+                CanJump = false;
+            }
         }
     }
 
@@ -44,19 +49,9 @@ public class PlayerMove : MonoBehaviour {
         if (coll.gameObject.tag == "death")
         {
             this.transform.position = StartP;
-            //animator.SetBool("jumping", false);
         }
     }
-    /*
-    void OnCollisionExit2D(Collision2D coll)
-    {
-        if (coll.gameObject.tag == "Floor")
-        {
-            CanJump = false;
-            //animator.SetBool("jumping", false);
-        }
-    }
-    */
+ 
     void OnTriggerEnter2D(Collider2D coll)
     {
         
@@ -68,11 +63,6 @@ public class PlayerMove : MonoBehaviour {
     }
     void OnTriggerExit2D(Collider2D coll)
     {
-        /*
-        if (coll.gameObject.tag == "Raising")
-        {
-            
-        }
-        */
+        
     }
 }
