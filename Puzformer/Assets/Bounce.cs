@@ -19,7 +19,7 @@ public class Bounce : MonoBehaviour {
     {
         if(bounce == true)
         {
-            rb2d.AddForce(new Vector2(0, 500));
+            rb2d.AddForce(new Vector2(0, 700));
             bounce = false;
         }
     }

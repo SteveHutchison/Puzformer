@@ -12,7 +12,7 @@ public class PlaceObject : MonoBehaviour {
     // Use this for initialization
     void Start () {
         blocktype = 0;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,8 +21,7 @@ public class PlaceObject : MonoBehaviour {
             //newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             newPosition = transform.position;
             offsetx = newPosition.x % 1;
-            offsety = newPosition.y % 1;
-          
+            offsety = newPosition.y % 1;        
             Instantiate(blocks[blocktype], new Vector3(newPosition.x - offsetx, newPosition.y - offsety, 0), Quaternion.identity);
                          
         }
